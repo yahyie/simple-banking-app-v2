@@ -107,6 +107,7 @@ A user-friendly and responsive Flask-based banking application designed for depl
    
    # Then configure your local repository
    git remote remove origin
+   git remote add origin https://github.com/yourusername/simple-banking-app-v2.git
    git remote set-url origin https://yourusername@github.com/yourusername/simple-banking-app-v2.git
    git branch -M main
    git push -u origin main
