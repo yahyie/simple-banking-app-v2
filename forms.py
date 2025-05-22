@@ -15,9 +15,29 @@ class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Register')
+    password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Register')    
+    
+    def validate_password(self, password):
+        errors = []
+        
+        if len(password.data) < 8:
+            errors.append('password must be at least 8 characters long')
+        
+        if not any(char.isupper() for char in password.data):
+            errors.append('password must contain at least one uppercase letter')
+            
+        if not any(char.islower() for char in password.data):
+            errors.append('password must contain at least one lowercase letter')
+            
+        if not any(char.isdigit() for char in password.data):
+            errors.append('password must contain at least one number')
+            
+        if not any(char in '!@#$%^&*(),.?":{}|<>' for char in password.data):
+            errors.append('password must contain at least one special character')
+            
+        if errors:
+            raise ValidationError('Password requirements not met: • ' + '• '.join(errors))
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
@@ -156,4 +176,4 @@ class ConfirmTransferForm(FlaskForm):
     recipient_account = HiddenField('Recipient Account Number')
     amount = HiddenField('Amount')
     transfer_type = HiddenField('Transfer Type')
-    submit = SubmitField('Confirm Transfer') 
+    submit = SubmitField('Confirm Transfer')
