@@ -38,6 +38,16 @@ def create_app():
 
     # CSRF Protection
     csrf.init_app(app)
+    app.config['WTF_CSRF_ENABLED'] = True
+    app.config['WTF_CSRF_TIME_LIMIT'] = 3600  # 1 hour CSRF token validity
+    app.config['WTF_CSRF_METHODS'] = ['POST', 'PUT', 'PATCH', 'DELETE']
+    app.config['WTF_CSRF_SSL_STRICT'] = True  # Only accept CSRF tokens over HTTPS
+    
+    @app.errorhandler(400)
+    def csrf_error(e):
+        if getattr(e, 'description', None) == 'The CSRF token is missing.':
+            return render_template('rate_limit_error.html', message="CSRF token missing or invalid. Please refresh the page and try again."), 400
+        return e
 
     # Database configuration
 
