@@ -327,27 +327,33 @@ def create_account():
 @limiter.limit("30 per hour")
 def admin_deposit():
     form = DepositForm()
-    
-    # Handle account lookup from query parameters (for the lookup button)
+    LARGE_DEPOSIT_THRESHOLD = 50000  # Set your threshold here
     account_details = None
     if request.args.get('account_number'):
         account_number = request.args.get('account_number')
         account_details = User.query.filter_by(account_number=account_number).first()
-    
+
+    # Double confirmation for large deposits
+    if request.method == 'POST':
+        account_number = request.form.get('account_number')
+        amount = float(request.form.get('amount', 0))
+        confirm = request.form.get('confirm')
+        if amount >= LARGE_DEPOSIT_THRESHOLD and not confirm:
+            # Show confirmation page
+            return render_template('admin/deposit_confirm.html', form=form, account_number=account_number, amount=amount)
+
     if form.validate_on_submit():
         user = User.query.filter_by(account_number=form.account_number.data).first()
         if not user:
             flash('User not found')
             return redirect(url_for('admin_deposit'))
-        
-        # Admin can only deposit to active accounts (or admin/manager accounts)
         if user.status != 'active' and not user.is_admin and not user.is_manager:
             flash('Cannot deposit to inactive account.')
             return redirect(url_for('admin_deposit'))
-        
         amount = form.amount.data
-        
-        # Call deposit method
+        if amount >= LARGE_DEPOSIT_THRESHOLD and not request.form.get('confirm'):
+            # Show confirmation page
+            return render_template('admin/deposit_confirm.html', form=form, account_number=form.account_number.data, amount=amount)
         if user.deposit(amount, current_user):
             db.session.commit()
             flash(f'Successfully deposited ₱{amount:.2f} to {user.username}')
@@ -355,7 +361,6 @@ def admin_deposit():
         else:
             flash('Deposit failed.')
             return redirect(url_for('admin_deposit'))
-    
     return render_template('admin/deposit.html', title='Deposit Funds', form=form, account_details=account_details)
 
 @app.route('/admin/edit_user/<int:user_id>', methods=['GET', 'POST'])
@@ -907,4 +912,4 @@ def manager_transfers():
     return render_template('manager/transfers.html', 
                          title='Transfer Transactions', 
                          transactions=transactions,
-                         users=users) 
+                         users=users)

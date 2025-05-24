@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-6 offset-lg-3">
+        <div class="card mt-5">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">Confirm Large Deposit</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('admin_deposit') }}">
+                    {{ form.hidden_tag() }}
+                    <input type="hidden" name="account_number" value="{{ account_number }}">
+                    <input type="hidden" name="amount" value="{{ amount }}">
+                    <div class="alert alert-warning">
+                        <p>You are about to deposit <strong>₱{{ "%.2f"|format(amount|float) }}</strong> to account <strong>{{ account_number }}</strong>.</p>
+                        <p>This is a large amount. Please confirm to proceed.</p>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" name="confirm" value="yes" class="btn btn-danger">Confirm Deposit</button>
+                        <a href="{{ url_for('admin_deposit') }}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
