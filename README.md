@@ -71,13 +71,16 @@ A user-friendly and responsive Flask-based banking application designed for depl
 ## Found Vulnerabilities
 - Weak password validation
 - Weak form input validation
-- Weak limit handling
+- Weak session handling
 - No confirmation when doing large transactions
 
 ---
 
 ## Security Improvements Implemented
-- 
+- Implemented a password validation that only accepts password with at least 1 uppercase, lowercase, digit, and special character.
+- Implemented a limitation in input lengths to avoid errors such as buffer overflow.
+- Improved the session handling and added a session lifetime to avoid session fixation.
+- Added a confirmation features when depositing large amount of money.
 
 ---
 
