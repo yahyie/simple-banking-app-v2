@@ -1,6 +1,121 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+    .card {
+        background: #fff7fa;
+        border-radius: 20px;
+        border: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(255, 111, 156, 0.2);
+    }
+    .card-header {
+        background: linear-gradient(145deg, #ffccde, #b3e5e0);
+        border-radius: 20px 20px 0 0;
+        padding: 20px;
+        border: none;
+        text-align: center; /* Center the text in the card header */
+    }
+    .card-header h4 {
+        color: #ff6f9c;
+        font-weight: 600;
+        font-size: 1.8rem;
+        margin: 0;
+    }
+    .card-body {
+        padding: 30px;
+    }
+    .btn-primary {
+        background: linear-gradient(145deg, #ff6f9c, #ffccde);
+        border: none;
+        border-radius: 50px;
+        padding: 12px 24px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: #fff7fa;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+    .btn-primary:hover {
+        background: linear-gradient(145deg, #b3e5e0, #f0c7d3);
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(255, 111, 156, 0.3);
+        color: #6b4e8e;
+    }
+    .btn-primary:focus {
+        box-shadow: 0 0 0 3px rgba(179, 229, 224, 0.4);
+    }
+    .form-label {
+        color: #6b4e8e;
+        font-weight: 500;
+        font-size: 1rem;
+    }
+    .form-control {
+        border: 2px solid #b3e5e0;
+        border-radius: 10px;
+        background: #ffffff;
+        color: #6b4e8e;
+        font-size: 1rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .form-control:focus {
+        border-color: #ff6f9c;
+        box-shadow: 0 0 0 3px rgba(255, 111, 156, 0.2);
+        outline: none;
+    }
+    .text-danger {
+        color: #ff6f9c !important;
+        font-size: 0.9rem;
+    }
+    .text-center p {
+        color: #6b4e8e;
+        font-size: 1rem;
+    }
+    .text-center a {
+        color: #ff6f9c;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    .text-center a:hover {
+        color: #b3e5e0;
+    }
+    @keyframes fadeIn {
+        0% { opacity: 0; transform: translateY(15px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 768px) {
+        .card {
+            border-radius: 15px;
+        }
+        .card-header {
+            border-radius: 15px 15px 0 0;
+            padding: 15px;
+        }
+        .card-header h4 {
+            font-size: 1.5rem;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .btn-primary {
+            font-size: 1rem;
+            padding: 10px 20px;
+        }
+        .form-label {
+            font-size: 0.9rem;
+        }
+        .form-control {
+            font-size: 0.95rem;
+        }
+        .text-center p, .text-center a {
+            font-size: 0.9rem;
+        }
+    }
+</style>
 <div class="row">
     <div class="col-md-6 offset-md-3">
         <div class="card">
