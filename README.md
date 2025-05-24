@@ -86,7 +86,16 @@ A user-friendly and responsive Flask-based banking application designed for depl
 - Integrated admin approval workflow for new accounts.
 - Two-step transaction confirmation for sensitive operations.
 
+
+
 ---
+![Home](https://github.com/yahyie/simple-banking-app-v2/blob/main/Screenshots/Home.png?raw=true)
+![022dd193-a0b4-4bd4-a5f0-622e33bb9fb0](https://github.com/yahyie/simple-banking-app-v2/blob/main/Screenshots/022dd193-a0b4-4bd4-a5f0-622e33bb9fb0.jfif?raw=true)
+![5a0ac7ea-2798-4981-a336-65b1659ec5a5](https://github.com/yahyie/simple-banking-app-v2/blob/main/Screenshots/5a0ac7ea-2798-4981-a336-65b1659ec5a5.jfif?raw=true)
+![09448b1e-6966-41db-a8f5-8fafbeb51a8a](https://github.com/yahyie/simple-banking-app-v2/blob/main/Screenshots/09448b1e-6966-41db-a8f5-8fafbeb51a8a.jfif?raw=true)
+
+
+
 
 ## Access the deployed application
 - Link to application: https://bovopo4471.pythonanywhere.com/login
