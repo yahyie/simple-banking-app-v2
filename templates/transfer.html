@@ -1,97 +1,380 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+    .card {
+        background: #fff7fa; 
+        border-radius: 20px; 
+        border: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(255, 111, 156, 0.2); 
+    }
+    .card-header {
+        background: linear-gradient(145deg, #ffccde, #b3e5e0); 
+        border-radius: 20px 20px 0 0;
+        padding: 20px;
+        border: none;
+    }
+    .card-header h5 {
+        color: #ff6f9c; 
+        font-weight: 600;
+        font-size: 1.6rem;
+        margin: 0;
+    }
+    .card-body {
+        padding: 30px;
+    }
+    h2 {
+        color: #ff6f9c; /* Coral pink */
+        font-weight: 700;
+        font-size: 2.5rem;
+        animation: fadeIn 0.6s ease-in-out;
+    }
+    .btn-primary, .btn-outline-primary, .btn-outline-secondary {
+        border-radius: 50px; 
+        font-weight: 600;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+    }
+    .btn-primary {
+        background: linear-gradient(145deg, #ff6f9c, #ffccde); /
+        border: none;
+        padding: 12px 24px;
+        color: #fff7fa; 
+    }
+    .btn-primary:hover {
+        background: linear-gradient(145deg, #b3e5e0, #f0c7d3); 
+        transform: scale(1.05); 
+        box-shadow: 0 4px 12px rgba(255, 111, 156, 0.3); 
+        color: #6b4e8e; 
+    }
+    .btn-primary:focus {
+        box-shadow: 0 0 0 3px rgba(179, 229, 224, 0.4); 
+    }
+    .btn-outline-primary {
+        border: 2px solid #ff6f9c; 
+        color: #ff6f9c; 
+        padding: 10px 20px;
+    }
+    .btn-outline-primary:hover {
+        background: #f0c7d3; 
+        border-color: #b3e5e0; 
+        color: #6b4e8e; 
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(255, 111, 156, 0.2);
+    }
+    .btn-outline-secondary {
+        border: 2px solid #6b4e8e; 
+        color: #6b4e8e; 
+        padding: 8px 16px;
+        font-size: 0.95rem;
+    }
+    .btn-outline-secondary:hover {
+        background: #f0e7f5; 
+        border-color: #ff6f9c; 
+        color: #ff6f9c; 
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(179, 229, 224, 0.2);
+    }
+    .btn .bi {
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+    }
+    .btn:hover .bi {
+        transform: scale(1.2); 
+    }
+    .form-control, .form-select {
+        border: 2px solid #b3e5e0; 
+        border-radius: 10px;
+        background: #ffffff;
+        color: #6b4e8e; 
+        font-size: 1rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .form-control:focus, .form-select:focus {
+        border-color: #ff6f9c; 
+        box-shadow: 0 0 0 3px rgba(255, 111, 156, 0.2); 
+        outline: none;
+    }
+    .form-label {
+        color: #6b4e8e;
+        font-weight: 500;
+        font-size: 1rem;
+    }
+    .input-group .btn-primary {
+        border-radius: 0 10px 10px 0; 
+    }
+    .table {
+        background: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    .table thead {
+        background: linear-gradient(145deg, #ffccde, #b3e5e0); 
+    }
+    .table th {
+        color: #ff6f9c; 
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 15px;
+    }
+    .table td {
+        color: #6b4e8e;
+        font-size: 1rem;
+        padding: 15px;
+        vertical-align: middle;
+    }
+    .table-hover tbody tr:hover {
+        background: #f0e7f5;
+    }
+    .badge {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        border-radius: 20px;
+        transition: transform 0.3s ease;
+    }
+    .badge:hover {
+        transform: scale(1.1); 
+    }
+    .badge.bg-success {
+        background: #b3e5e0;
+        color: #6b4e8e; 
+    }
+    .badge.bg-secondary {
+        background: #f0e7f5; 
+        color: #6b4e8e; 
+    }
+    .badge.bg-warning {
+        background: #ffccde;
+        color: #6b4e8e; 
+    }
+    .badge.bg-danger {
+        background: #f0c7d3; 
+        color: #6b4e8e; 
+    }
+    .text-muted {
+        color: #6b4e8e !important; 
+        opacity: 0.7;
+    }
+    @keyframes fadeIn {
+        0% { opacity: 0; transform: translateY(15px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 768px) {
+        .card {
+            border-radius: 15px;
+        }
+        .card-header {
+            border-radius: 15px 15px 0 0;
+            padding: 15px;
+        }
+        .card-header h5 {
+            font-size: 1.4rem;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        h2 {
+            font-size: 2rem;
+        }
+        .btn-primary, .btn-outline-primary, .btn-outline-secondary {
+            font-size: 0.95rem;
+            padding: 10px 18px;
+        }
+        .btn-outline-secondary {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+        .form-control, .form-select {
+            font-size: 0.95rem;
+        }
+        .form-label {
+            font-size: 0.9rem;
+        }
+        .table th, .table td {
+            font-size: 0.9rem;
+            padding: 10px;
+        }
+        .badge {
+            font-size: 0.8rem;
+            padding: 6px 10px;
+        }
+    }
+</style>
+
 <div class="row">
-    <div class="col-md-6 offset-md-3">
-        <div class="card">
+    <div class="col-lg-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Transfer Transactions</h2>
+            <a href="{{ url_for('manager_dashboard') }}" class="btn btn-outline-primary">Back to Dashboard</a>
+        </div>
+        
+        <!-- Filters -->
+        <div class="card mb-4">
             <div class="card-header">
-                <h4>Transfer Money</h4>
+                <h5 class="mb-0">Filter Transfers</h5>
             </div>
             <div class="card-body">
-                <div class="alert alert-info">
-                    Your current balance: <strong>₱{{ "%.2f"|format(current_user.balance) }}</strong>
-                </div>
-                
-                <form method="post" novalidate>
-                    {{ form.hidden_tag() }}
-                    
-                    <div class="mb-3">
-                        <label class="form-label">Transfer Method</label>
-                        <div class="btn-group w-100" role="group">
-                            {% for subfield in form.transfer_type %}
-                            <input type="radio" class="btn-check" name="transfer_type" id="{{ subfield.id }}" value="{{ subfield.data }}" autocomplete="off"
-                                   {% if subfield.checked %}checked{% endif %}>
-                            <label class="btn btn-outline-primary" for="{{ subfield.id }}">{{ subfield.label }}</label>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    
-                    <div class="mb-3" id="username-field">
-                        {{ form.recipient_username.label(class="form-label") }}
-                        {{ form.recipient_username(class="form-control") }}
-                        {% for error in form.recipient_username.errors %}
-                        <div class="text-danger">{{ error }}</div>
-                        {% endfor %}
-                    </div>
-                    
-                    <div class="mb-3" id="account-field" style="display: none;">
-                        {{ form.recipient_account.label(class="form-label") }}
-                        {{ form.recipient_account(class="form-control") }}
-                        {% for error in form.recipient_account.errors %}
-                        <div class="text-danger">{{ error }}</div>
-                        {% endfor %}
-                    </div>
-                    
-                    <div class="mb-3">
-                        {{ form.amount.label(class="form-label") }}
+                <form method="GET" action="{{ url_for('manager_transfers') }}" class="row g-3">
+                    <div class="col-md-12 mb-3">
                         <div class="input-group">
-                            <span class="input-group-text">₱</span>
-                            {{ form.amount(class="form-control") }}
+                            <input type="text" name="search" class="form-control" placeholder="Search by ID, account number, username, or amount" value="{{ request.args.get('search', '') }}">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-search"></i> Search
+                            </button>
                         </div>
-                        {% for error in form.amount.errors %}
-                        <div class="text-danger">{{ error }}</div>
-                        {% endfor %}
                     </div>
-                    <div class="d-grid gap-2">
-                        {{ form.submit(class="btn btn-primary") }}
+                    
+                    <div class="col-md-3">
+                        <label class="form-label">From Date</label>
+                        <input type="date" name="from_date" class="form-control" value="{{ request.args.get('from_date', '') }}">
                     </div>
+                    <div class="col-md-3">
+                        <label class="form-label">To Date</label>
+                        <input type="date" name="to_date" class="form-control" value="{{ request.args.get('to_date', '') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Minimum Amount</label>
+                        <input type="number" step="0.01" name="min_amount" class="form-control" placeholder="Min ₱" value="{{ request.args.get('min_amount', '') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Maximum Amount</label>
+                        <input type="number" step="0.01" name="max_amount" class="form-control" placeholder="Max ₱" value="{{ request.args.get('max_amount', '') }}">
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <label class="form-label">User</label>
+                        <select name="user_id" class="form-select">
+                            <option value="">All Users</option>
+                            {% for user in users %}
+                            <option value="{{ user.id }}" {% if request.args.get('user_id')|int == user.id %}selected{% endif %}>
+                                {{ user.username }}
+                                {% if user.is_admin %}(Admin){% endif %}
+                                {% if user.is_manager %}(Manager){% endif %}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">User Role</label>
+                        <select name="user_role" class="form-select">
+                            <option value="">Both Sender & Receiver</option>
+                            <option value="sender" {% if request.args.get('user_role') == 'sender' %}selected{% endif %}>As Sender</option>
+                            <option value="receiver" {% if request.args.get('user_role') == 'receiver' %}selected{% endif %}>As Receiver</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 align-self-end">
+                        <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                    </div>
+                    
+                    {% if request.args.get('search') or request.args.get('from_date') or request.args.get('to_date') or 
+                          request.args.get('min_amount') or request.args.get('max_amount') or 
+                          request.args.get('user_id') or request.args.get('user_role') %}
+                    <div class="col-12 mt-2">
+                        <a href="{{ url_for('manager_transfers') }}" class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-x-circle"></i> Clear All Filters
+                        </a>
+                    </div>
+                    {% endif %}
                 </form>
+            </div>
+        </div>
+        
+        <!-- Transfer Transactions Table -->
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    {% if request.args.get('search') %}
+                    Search Results: "{{ request.args.get('search') }}"
+                    {% else %}
+                    All Transfer Transactions
+                    {% endif %}
+                </h5>
+                <span class="badge bg-secondary">{{ transactions|length }} transfers found</span>
+            </div>
+            <div class="card-body">
+                {% if transactions %}
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date & Time</th>
+                                <th>From (Account #)</th>
+                                <th>To (Account #)</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for transaction in transactions %}
+                            <tr>
+                                <td>{{ transaction.id }}</td>
+                                <td>{{ transaction.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                                <td>
+                                    {% if transaction.sender %}
+                                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="{{ transaction.sender.username }}">
+                                            {{ transaction.sender.account_number }}
+                                        </span>
+                                        {% if transaction.sender.is_admin %}
+                                        <span class="badge bg-warning text-dark">Admin</span>
+                                        {% elif transaction.sender.is_manager %}
+                                        <span class="badge bg-danger">Manager</span>
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="text-muted">Unknown</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if transaction.receiver %}
+                                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="{{ transaction.receiver.username }}">
+                                            {{ transaction.receiver.account_number }}
+                                        </span>
+                                        {% if transaction.receiver.is_admin %}
+                                        <span class="badge bg-warning text-dark">Admin</span>
+                                        {% elif transaction.receiver.is_manager %}
+                                        <span class="badge bg-danger">Manager</span>
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="text-muted">Unknown</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-end fw-bold">₱{{ "%.2f"|format(transaction.amount) }}</td>
+                                <td>
+                                    <span class="badge bg-success">Completed</span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center p-4">
+                    <p class="text-muted">No transfer transactions found.</p>
+                    {% if request.args %}
+                    <p>Try adjusting your search filters.</p>
+                    {% endif %}
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
 
+{% block scripts %}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Show/hide fields based on transfer type
-    var transferType = document.getElementsByName('transfer_type');
-    var usernameField = document.getElementById('username-field');
-    var accountField = document.getElementById('account-field');
-    
-    for (var i = 0; i < transferType.length; i++) {
-        transferType[i].addEventListener('change', function() {
-            if (this.value === 'username') {
-                usernameField.style.display = 'block';
-                accountField.style.display = 'none';
-            } else if (this.value === 'account') {
-                usernameField.style.display = 'none';
-                accountField.style.display = 'block';
-            }
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
         });
-    }
-    
-    // Set initial state
-    for (var i = 0; i < transferType.length; i++) {
-        if (transferType[i].checked) {
-            if (transferType[i].value === 'username') {
-                usernameField.style.display = 'block';
-                accountField.style.display = 'none';
-            } else if (transferType[i].value === 'account') {
-                usernameField.style.display = 'none';
-                accountField.style.display = 'block';
-            }
-        }
-    }
-});
+    });
 </script>
-{% endblock %} 
+{% endblock %}
