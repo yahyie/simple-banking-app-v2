@@ -82,6 +82,7 @@ A user-friendly and responsive Flask-based banking application designed for depl
 - Improved the session handling and added a session lifetime to avoid session fixation.
 - Added a confirmation features when depositing large amount of money.
 
+
 ---
 
 ## Access the deployed application
