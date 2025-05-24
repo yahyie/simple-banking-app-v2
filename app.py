@@ -62,11 +62,13 @@ def create_app():
     # Register custom error handler for rate limiting
     @app.errorhandler(RateLimitExceeded)
     def handle_rate_limit_exceeded(e):
+        # Log the event for auditing
+        app.logger.warning(f"Rate limit exceeded: {request.remote_addr} {request.method} {request.path} - {str(e)}")
         # Check if it's an API request (expecting JSON)
         if request.path.startswith('/api/') or request.headers.get('Accept') == 'application/json':
             return jsonify({"error": "Rate limit exceeded", "message": str(e)}), 429
         # Otherwise, return the HTML template
-        return render_template('rate_limit_error.html', message=str(e)), 429
+        return render_template('rate_limit_error.html', message="You have exceeded the allowed number of requests. Please try again later."), 429
 
     return app
 
@@ -113,4 +115,4 @@ if __name__ == '__main__':
     
     with app.app_context():
         db.create_all()
-    app.run(debug=True) 
+    app.run(debug=True)
