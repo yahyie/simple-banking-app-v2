@@ -1,15 +1,11 @@
 import os
-from flask import Flask, render_template, redirect, url_for, flash, request, jsonify, session
-from flask_login import current_user, login_user, logout_user, login_required
-from werkzeug.security import generate_password_hash, check_password_hash
-import datetime
+from flask import Flask, render_template, request, jsonify
 from dotenv import load_dotenv
-from itsdangerous import URLSafeTimedSerializer
 import secrets
 import pymysql
 from flask_wtf.csrf import CSRFProtect
 from flask_limiter.errors import RateLimitExceeded
-from flask_session import Session  # <-- Add this import
+from flask_session import Session
 
 # Import extensions
 from extensions import db, login_manager, bcrypt, limiter
