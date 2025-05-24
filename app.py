@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, url_for, flash, request, jsonify
+from flask import Flask, render_template, redirect, url_for, flash, request, jsonify, session
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
@@ -9,6 +9,7 @@ import secrets
 import pymysql
 from flask_wtf.csrf import CSRFProtect
 from flask_limiter.errors import RateLimitExceeded
+from flask_session import Session  # <-- Add this import
 
 # Import extensions
 from extensions import db, login_manager, bcrypt, limiter
@@ -26,6 +27,14 @@ pymysql.install_as_MySQLdb()
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or secrets.token_hex(16)
+
+    # Flask-Session configuration for server-side sessions
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.config['SESSION_PERMANENT'] = True  # Enable permanent sessions
+    app.config['PERMANENT_SESSION_LIFETIME'] = 900  # 15 minutes (in seconds)
+    app.config['SESSION_USE_SIGNER'] = True
+    app.config['SESSION_FILE_DIR'] = os.path.join(os.path.dirname(__file__), 'flask_session')
+    Session(app)
 
     # CSRF Protection
     csrf.init_app(app)
