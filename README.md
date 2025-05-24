@@ -81,6 +81,11 @@ A user-friendly and responsive Flask-based banking application designed for depl
 
 ---
 
+## Access the deployed application
+- Link to application: https://bovopo4471.pythonanywhere.com/login
+
+---
+
 ## How to Run Application
 
 ### Prerequisites
@@ -154,8 +159,7 @@ A user-friendly and responsive Flask-based banking application designed for depl
 
 4. Access the application at `http://localhost:5000`
 
-## Access the deployed application
-- Link to application: 
+---
 
 ## Usage
 
