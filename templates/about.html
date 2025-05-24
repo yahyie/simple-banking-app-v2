@@ -1,6 +1,116 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+    .container {
+        max-width: 1140px; 
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+    .card {
+        background: #fff7fa; 
+        border-radius: 25px; 
+        border: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-3px); /* Gentle lift on hover */
+        box-shadow: 0 8px 20px rgba(255, 111, 156, 0.2); /* Soft coral pink glow */
+    }
+    .card-body {
+        padding: 35px; 
+    }
+    .card-title {
+        color: #ff6f9c; /* Coral pink from base.html */
+        font-weight: 700;
+        font-size: 2.7rem; /* Bold and prominent */
+        letter-spacing: 0.5px; /* Subtle spacing for charm */
+        animation: fadeIn 0.6s ease-in-out;
+    }
+    h3 {
+        color: #6b4e8e; /* Muted purple from base.html */
+        font-weight: 600;
+        font-size: 1.9rem; /* Refined for hierarchy */
+        margin-bottom: 18px;
+        position: relative;
+    }
+    h3::after {
+        content: '';
+        display: block;
+        width: 50px;
+        height: 3px;
+        background: #b3e5e0; 
+        margin-top: 5px;
+        border-radius: 2px;
+    }
+    p {
+        color: #6b4e8e; 
+        font-size: 1.15rem; 
+        line-height: 1.9; 
+    }
+    .list-group-item {
+        background: linear-gradient(145deg, #ffffff, #f0e7f5); 
+        border: none;
+        border-left: 5px solid #b3e5e0; /* Light mint accent */
+        border-radius: 12px;
+        padding: 14px 18px;
+        margin-bottom: 12px;
+        color: #6b4e8e; /* Muted purple */
+        transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    .list-group-item:hover {
+        background: #f0c7d3; /* Soft pink hover from base.html */
+        transform: translateX(3px); 
+        box-shadow: 0 4px 10px rgba(255, 111, 156, 0.15);
+    }
+    .tech-card {
+        background: linear-gradient(145deg, #ffccde, #b3e5e0); 
+        border-radius: 15px;
+        border: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .tech-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 6px 15px rgba(179, 229, 224, 0.2); 
+    }
+    .tech-card h5 {
+        color: #ff6f9c; /* Coral pink */
+        font-weight: 600;
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+    .tech-card p {
+        color: #6b4e8e; /* Muted purple */
+        font-size: 1rem;
+    }
+    @keyframes fadeIn {
+        0% { opacity: 0; transform: translateY(15px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 768px) {
+        .card {
+            border-radius: 18px;
+        }
+        .card-body {
+            padding: 25px;
+        }
+        .card-title {
+            font-size: 2rem;
+        }
+        h3 {
+            font-size: 1.6rem;
+        }
+        h3::after {
+            width: 40px;
+        }
+        p, .list-group-item, .tech-card p {
+            font-size: 1rem;
+        }
+        .row.mb-4 {
+            margin-bottom: 1.5rem !important;
+        }
+    }
+</style>
 <div class="container py-5">
     <div class="card shadow">
         <div class="card-body">
