@@ -15,9 +15,9 @@ A user-friendly and responsive Flask-based banking application designed for depl
 ---
 
 ## Objectives
-1. Objective 1
-2. Objective 2
-3. Objective 3
+1. Provide a secure and intuitive digital banking platform for users to manage their finances online.
+2. Implement robust user authentication and role-based access control to safeguard user accounts and sensitive operations.
+3. Integrate Philippine Standard Geographic Code (PSGC) data for standardized address management and validation.
 
 --- 
 
@@ -71,17 +71,20 @@ A user-friendly and responsive Flask-based banking application designed for depl
 ## Found Vulnerabilities
 - Weak password validation
 - Weak form input validation
-- Weak session handling
+- Weak limit handling
 - No confirmation when doing large transactions
 
 ---
 
 ## Security Improvements Implemented
-- Implemented a password validation that only accepts password with at least 1 uppercase, lowercase, digit, and special character.
-- Implemented a limitation in input lengths to avoid errors such as buffer overflow.
-- Improved the session handling and added a session lifetime to avoid session fixation.
-- Added a confirmation features when depositing large amount of money.
-
+- Enforced strong password validation rules.
+- Implemented thorough input validation for all user forms.
+- Improved rate limiting and transaction throttling to prevent abuse.
+- Added explicit confirmation steps for large transactions.
+- Enhanced CSRF protection and session security.
+- Adopted bcrypt for password hashing and secure storage.
+- Integrated admin approval workflow for new accounts.
+- Two-step transaction confirmation for sensitive operations.
 
 ---
 
@@ -104,10 +107,10 @@ A user-friendly and responsive Flask-based banking application designed for depl
    # For Ubuntu/Debian
    sudo apt update
    sudo apt install mysql-server
-   
+
    # For macOS with Homebrew
    brew install mysql
-   
+
    # For Windows
    # Download and install from the official website
    ```
@@ -115,7 +118,7 @@ A user-friendly and responsive Flask-based banking application designed for depl
 2. Create a database user and set privileges:
    ```
    mysql -u root -p
-   
+
    # In MySQL prompt
    CREATE USER 'bankapp'@'localhost' IDENTIFIED BY 'your_password';
    GRANT ALL PRIVILEGES ON *.* TO 'bankapp'@'localhost';
@@ -161,7 +164,7 @@ A user-friendly and responsive Flask-based banking application designed for depl
    python app.py
    ```
 
-4. Access the application at `http://localhost:5000`
+5. Access the application at `http://localhost:5000`
 
 ---
 
@@ -207,6 +210,8 @@ A user-friendly and responsive Flask-based banking application designed for depl
 - View all user transactions
 - Monitor and audit admin activities
 
+---
+
 ## User Roles
 
 The system supports three types of user roles:
@@ -226,6 +231,8 @@ The system supports three types of user roles:
    - Monitor all system transfers
    - System-wide oversight capabilities
 
+---
+
 ## Address Management with PSGC API
 
 The application integrates with the Philippine Standard Geographic Code (PSGC) API to provide standardized address selection for user profiles. The address system follows the Philippine geographical hierarchy:
@@ -237,6 +244,8 @@ The application integrates with the Philippine Standard Geographic Code (PSGC) A
 
 This integration ensures addresses are standardized and validates location data according to the Philippine geographical structure.
 
+---
+
 ## Technologies Used
 
 - **Backend**: Python, Flask
@@ -246,6 +255,8 @@ This integration ensures addresses are standardized and validates location data 
 - **Forms**: Flask-WTF, WTForms
 - **Security**: Flask-Limiter for API rate limiting, CSRF protection
 - **External API**: PSGC API for Philippine geographic data
+
+---
 
 ## Rate Limiting
 
@@ -271,6 +282,8 @@ By default, the rate limiting data is stored in memory. For production use, it's
    ```
 
 If Redis is not available, the application will automatically fall back to in-memory storage.
+
+---
 
 ## License
 
